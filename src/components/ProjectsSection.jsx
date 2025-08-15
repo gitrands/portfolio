@@ -12,23 +12,33 @@ const projects = [
   },
   {
     id: 2,
-    title: "Yet to be deployed",
+    title: "Fino Organizer",
     description:
-      "An Emmersive E-commerce website with stunning features at one place .",
-    image: "/projects/project2.png",
-    tags: ["JavaScript", "Node.js", "React.js"],
-    demoUrl: "#",
-    githubUrl: "https://github.com/gitrands/E-commerce-S-version-",
+      "An Emmersive Management website with stunning features at one place .",
+    image: "/projects/thum-org.png",
+    tags: ["JavaScript", "Node.js", "Next.js"],
+    demoUrl: "https://main.dfuccach7gbg5.amplifyapp.com/projects/5",
+    githubUrl: "https://github.com/gitrands/Project-manager",
   },
   {
     id: 3,
-    title: "Development on progress",
+    title: "Fino Learn",
     description:
-      "Development on progress",
-    image: "/projects/project3.png",
-    tags: ["React", "Node.js", "Stripe"],
+      "A feature rich and innovative place to Learn new Tech",
+    image: "/projects/fino-learn.png",
+    tags: ["Next.js", "Node.js", "Stripe"],
+    demoUrl: "https://finolearn.vercel.app/",
+    githubUrl: "https://github.com/gitrands/FinoLearn",
+  },
+  {
+    id: 4,
+    title: "Fino Saloon",
+    description:
+      "An Advanced Online Booking Service working on Spring boot Microservices to Service Millions",
+    image: "/projects/hair-saloon.png",
+    tags: ["Next.js", "Node.js", "Spring-boot"],
     demoUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/gitrands/online-hair-dressing",
   },
 ];
 
