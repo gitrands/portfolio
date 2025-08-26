@@ -6,27 +6,40 @@ export const HeroSection = () => {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10">
-        <div className="space-y-6">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            <span className="opacity-0 animate-fade-in"> Hi, I'm</span>
-            <span className="text-primary opacity-0 animate-fade-in-delay-1">
-              {" "}
-              Jeeva
+      <div className="container max-w-5xl mx-auto z-10">
+        <div className="space-y-6 text-left sm:-ml-1 md:-ml-6 lg:-ml-10 xl:-ml-12">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[1.05] tracking-tight">
+            <span className="typewriter-15 pr-2">
+              Hi, I'm Jeeva
             </span>
-            <span className="text-gradient ml-2 opacity-0 animate-fade-in-delay-2">
-              {" "}
+            <span
+              className="opacity-0 animate-slide-in-left text-primary inline-block text-balance text-wrap break-keep text-glow glow-pulse"
+              style={{ animationDelay: '1.25s' }}
+            >
+              {''}
+              
+            </span>
+            <span
+              className="ml-2 opacity-0 animate-slide-in-left gradient-text-animate inline-block"
+              style={{ animationDelay: '1.4s' }}
+            >
               R . A .
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
+          <p
+            className="text-xl md:text-2xl text-muted-foreground max-w-2xl opacity-0 animate-slide-in-left"
+            style={{ animationDelay: '1.6s' }}
+          >
             I create stellar web experiences with modern technologies.
             Specializing in front-end development, I build interfaces that are
             both beautiful and functional.
           </p>
 
-          <div className="pt-4 opacity-0 animate-fade-in-delay-4">
+          
+
+          {/* Keep the button in the same centered position */}
+          <div className="pt-8 w-full text-center opacity-0 animate-fade-in-delay-4">
             <a href="#projects" className="cosmic-button">
               View My Work
             </a>

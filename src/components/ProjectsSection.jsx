@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, ExternalLink, Github, Code2, Server, Cloud, Database, Boxes } from "lucide-react";
 
 const projects = [
   {
@@ -43,18 +43,51 @@ const projects = [
 ];
 
 export const ProjectsSection = () => {
+  const bgImages = [
+    "/projects/project1.png",
+    "/projects/thum-org.png",
+    "/projects/fino-learn.png",
+    "/projects/hair-saloon.png",
+  ];
+  const tiles = Array.from({ length: 56 }, (_, i) => bgImages[i % bgImages.length]);
   return (
-    <section id="projects" className="py-24 px-4 relative">
+    <section id="projects" className="py-24 px-4 relative overflow-hidden">
+      {/* Background image mosaic covering entire section */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-20">
+          <div className="grid w-full h-full" style={{ gridTemplateColumns: "repeat(8, 1fr)", gridAutoRows: "110px" }}>
+            {tiles.map((src, idx) => (
+              <div key={idx} className="relative overflow-hidden">
+                <img src={src} alt="bg tile" className="w-full h-full object-cover animate-kenburns-slow" loading="lazy" />
+                <div className="absolute inset-0 bg-background/30" />
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Subtle overlay to keep content readable */}
+        <div className="absolute inset-0 bg-background/50 backdrop-blur-[1px]" />
+      </div>
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
           {" "}
           Featured <span className="text-primary"> Projects </span>
         </h2>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
           Here are some of my recent projects. Each project was carefully
           crafted with attention to detail, performance, and user experience.
         </p>
+
+        {/* Non-intrusive tech icon strip */}
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-8 opacity-90">
+          <i className="devicon-react-original colored text-3xl animate-float" aria-hidden />
+          <i className="devicon-nextjs-original text-3xl animate-float" style={{ animationDelay: '0.05s' }} aria-hidden />
+          <i className="devicon-nodejs-plain colored text-3xl animate-float" style={{ animationDelay: '0.1s' }} aria-hidden />
+          <i className="devicon-express-original text-3xl animate-float" style={{ animationDelay: '0.15s' }} aria-hidden />
+          <i className="devicon-amazonwebservices-plain colored text-3xl animate-float" style={{ animationDelay: '0.2s' }} aria-hidden />
+          <i className="devicon-docker-plain colored text-3xl animate-float" style={{ animationDelay: '0.25s' }} aria-hidden />
+          <i className="devicon-tailwindcss-plain colored text-3xl animate-float" style={{ animationDelay: '0.3s' }} aria-hidden />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key) => (
