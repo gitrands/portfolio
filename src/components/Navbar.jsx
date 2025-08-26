@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Menu, X, Search, ExternalLink, Mail, Phone, Github, Linkedin, FileText } from "lucide-react";
+import { Search, ExternalLink, Mail, Phone, Github, Linkedin, FileText } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -12,7 +12,6 @@ const navItems = [
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
   const [isCmdOpen, setIsCmdOpen] = useState(false);
@@ -39,6 +38,19 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when command palette is open
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    if (isCmdOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = original || "";
+    }
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [isCmdOpen]);
 
   // Observe sections to highlight active link while scrolling
   useEffect(() => {
@@ -88,6 +100,11 @@ export const Navbar = () => {
   const filtered = commands.filter((c) =>
     c.label.toLowerCase().includes(query.trim().toLowerCase())
   );
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   // Keyboard shortcuts: Cmd/Ctrl+K to open, numbers 1-5 jump
   useEffect(() => {
@@ -209,52 +226,19 @@ export const Navbar = () => {
           </button>
         </div>
 
-        {/* mobile nav */}
-
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}{" "}
-        </button>
-
-        <div
-          className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item) => {
-              const id = item.href.replace("#", "");
-              const isActive = activeSection === id;
-              return (
-                <a
-                  key={id}
-                  href={item.href}
-                  className={cn(
-                    "relative text-foreground/90 hover:text-primary transition-colors duration-300",
-                    isActive && "text-primary"
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="relative px-2">
-                    {item.name}
-                    <span
-                      className={cn(
-                        "absolute left-0 -bottom-1.5 h-0.5 w-full bg-gradient-to-r from-primary via-fuchsia-500 to-cyan-400",
-                        isActive ? "opacity-100" : "opacity-40"
-                      )}
-                    />
-                  </span>
-                </a>
-              );
-            })}
-          </div>
+        {/* mobile: show only search */}
+        <div className={cn("md:hidden flex items-center gap-1", isCmdOpen && "invisible pointer-events-none")}> 
+          <button
+            onClick={() => {
+              setIsCmdOpen(true);
+              setQuery("");
+              setHighlightIndex(0);
+            }}
+            className="h-10 w-10 flex items-center justify-center text-foreground"
+            aria-label="Open Search"
+          >
+            <Search size={22} />
+          </button>
         </div>
       </div>
 
@@ -333,6 +317,7 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
+
     </nav>
   );
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { SkillsVectors } from "@/components/vectors/SkillsVectors";
 
 // Central skills model (with Devicon class names)
 const skills = [
@@ -69,23 +70,24 @@ const ProgressBar = ({ value, color, showLabel = true }) => {
 };
 
 export const SkillsSection = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("backend");
 
   const filteredSkills = skills.filter(
     (skill) => activeCategory === "all" || skill.category === activeCategory
   );
 
   return (
-    <section id="skills" className="py-24 px-4 relative bg-secondary/30">
+    <section id="skills" className="py-24 px-4 relative bg-secondary/30" data-reveal data-reveal-type="fade-up">
+      <SkillsVectors />
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center" data-reveal data-reveal-type="fade-up">
           My <span className="text-primary">Skills</span>
         </h2>
-        <p className="text-center text-foreground/70 max-w-2xl mx-auto mb-12">
+        <p className="text-center text-foreground/70 max-w-2xl mx-auto mb-12" data-reveal data-reveal-type="fade-up" data-reveal-delay=".08s">
           A snapshot of my core tools and technologies with proficiency levels.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-3 mb-10" data-reveal data-reveal-type="fade-up" data-reveal-delay=".12s">
           {categories.map((category) => (
             <button
               key={category}
@@ -110,6 +112,9 @@ export const SkillsSection = () => {
                 key={skill.name}
                 className="group relative bg-card p-5 rounded-xl shadow-xs card-hover animate-fade-in"
                 style={{ animationDelay: `${i * 0.05}s` }}
+                data-reveal
+                data-reveal-type="fade-up"
+                data-reveal-delay={`${0.04 * i}s`}
               >
                 <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
                   <div className="absolute -left-1/3 top-0 h-full w-1/2 bg-white/5 transform -skew-x-12 transition-transform duration-900 group-hover:translate-x-[200%]" />
